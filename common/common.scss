@@ -10,12 +10,15 @@
 .dropdown-button .dropdown-content {
   display: none;
   position: absolute;
-  right: 0px;
+  left: 7px;
   z-index: z("dropdown");
   min-width: 100%;
 }
 .dropdown-button .dropdown-content a {
   white-space: nowrap;
+  width: 100%;
+  padding-top: 12px;
+  padding-bottom: 12px;
 }
 /* Show the dropdown menu on hover */
 .dropdown-button:hover .dropdown-content {

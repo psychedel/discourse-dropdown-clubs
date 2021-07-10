@@ -41,7 +41,7 @@ export default {
             menu_links.forEach(link => {
               const attributes = link.split(',');
               menu_links_buffer.push (
-                h("a.btn.btn-default.btn-small.btn-icon-text", {
+                h("a.btn.btn-default.btn-icon-text", {
                   href: attributes[2],
                   title: attributes[1]
                   }, 
@@ -55,7 +55,7 @@ export default {
         };
 
         menu_links_buffer.push (
-          h("a.btn.btn-default.btn-small.btn-icon-text", { onclick: createTopic }, 
+          h("a.btn.btn-default.btn-icon-text", { onclick: createTopic }, 
             [iconNode(settings.new_topic_icon), 
             [h("span.d-button-label",`${settings.new_topic_title}`)]
             ]
