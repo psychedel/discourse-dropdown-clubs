@@ -9,12 +9,9 @@ export default {
     withPluginApi ("0.8.41", (api) => {
       api.decorateWidget("header-buttons:after", helper => {
 
-        if (!Discourse.User.current()) return;
+        if (api.getCurrentUser() == null) return;
 
         let container = api.container,
-            showExtraInfo = helper.attrs.minimized,
-            currentUser = api.getCurrentUser(),
-            mobileView = helper.widget.site.mobileView,
             composerController = container.lookup("controller:composer");
 
         const createTopic = function() {
@@ -62,17 +59,13 @@ export default {
           )
         );
             
-        let menu_buffer = 
-        //mobileView ? [h('button.widget-button.btn.btn-primary.btn-small.btn-icon-text', iconNode(settings.button_icon))] :
-          [h('button.widget-button.btn.btn-primary.btn-small.btn-icon-text', [iconNode(settings.button_icon),
+        let menu_buffer = [h('button.widget-button.btn.btn-primary.btn-small.btn-icon-text', [iconNode(settings.button_icon),
             [h('span.d-button-label',`${settings.button_title}`)]]
           )];
 
         menu_buffer.push(h('div.dropdown-content', menu_links_buffer));
 
-        if (!showExtraInfo) {
-          return h('div.dropdown-button', menu_buffer)
-        }
+        return h('div.dropdown-button', menu_buffer)
       })
     })
   }
