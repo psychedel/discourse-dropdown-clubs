@@ -4,7 +4,7 @@ button_icon:
 button_title:
   type: string
   default: "Dropdown"
-no_button_title_on_mobile:
+hide_button_title_on_mobile:
   type: bool
   default: false
 dropdown_items:

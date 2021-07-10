@@ -4,7 +4,7 @@
 .dropdown-button button {
   padding-right: 6px;
 }
-@if $no_button_title_on_mobile == 'true' {
+@if $hide_button_title_on_mobile == 'true' {
   .dropdown-button button .d-button-label {
     display: none;
   }
