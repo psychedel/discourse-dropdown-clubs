@@ -9,7 +9,7 @@ export default {
     withPluginApi ("0.8.41", (api) => {
       api.decorateWidget("header-buttons:after", helper => {
 
-        //if (!Discourse.User.current()) return;
+        if (!Discourse.User.current()) return;
 
         let container = api.container,
             showExtraInfo = helper.attrs.minimized,
