@@ -4,6 +4,10 @@
 .dropdown-button button {
   padding-right: 6px;
 }
+/* Show the dropdown menu on click */
+#dropdown-button:hover #dropdown-button-content.show-dropdown {
+  display: block;
+}
 @if $hide_button_title_on_mobile == 'true' {
   .dropdown-button button .d-button-label {
     display: none;

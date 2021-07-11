@@ -7,9 +7,9 @@ export default {
   name: "custom-dropdown-button",
   initialize () {
     withPluginApi ("0.8.41", (api) => {
-      api.decorateWidget("header-buttons:after", helper => {
+      api.decorateWidget("header-buttons:before", helper => {
 
-        if (api.getCurrentUser() == null) return;
+        if(api.getCurrentUser() == null) return; 
 
         let container = api.container,
             composerController = container.lookup("controller:composer");
@@ -51,6 +51,16 @@ export default {
           }
         };
 
+        const toggleDropdown = function() {
+          const dropdownContent = document.getElementById("dropdown-button-content");
+          dropdownContent.classList.toggle("show-dropdown");
+        };
+
+        const createTopicThenToggle = async () => {
+          createTopic();
+          toggleDropdown();
+        };
+
         menu_links_buffer.push (
           h("a.btn.btn-default.btn-icon-text", { onclick: createTopic }, 
             [iconNode(settings.new_topic_icon), 
@@ -59,13 +69,13 @@ export default {
           )
         );
             
-        let menu_buffer = [h('button.widget-button.btn.btn-primary.btn-small.btn-icon-text', [iconNode(settings.button_icon),
+        let menu_buffer = [h('button.btn.btn-primary.btn-small.btn-icon-text', { onclick: toggleDropdown }, [iconNode(settings.button_icon),
             [h('span.d-button-label',`${settings.button_title}`)]]
           )];
 
-        menu_buffer.push(h('div.dropdown-content', menu_links_buffer));
+        menu_buffer.push(h('div#dropdown-button-content', menu_links_buffer));
 
-        return h('div.dropdown-button', menu_buffer)
+        return h('div#dropdown-button', menu_buffer)
       })
     })
   }
