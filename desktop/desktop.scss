@@ -1,4 +1,12 @@
-/* Show the dropdown menu on click */
-#dropdown-button:hover #dropdown-button-content.show-dropdown {
+/* Show the dropdown menu on hover */
+#dropdown-button:hover #dropdown-button-content {
   display: block;
 }
+/* Change the background color of the dropdown button when the dropdown content is shown */
+#dropdown-button:hover button{
+  background: var(--tertiary-hover);
+  color: var(--secondary);
+} 
+#dropdown-button:hover button svg {
+  color: var(--secondary);
+} 

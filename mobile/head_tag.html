@@ -1,0 +1,17 @@
+<script type="text/discourse-plugin" version="0.8">
+  //prevent glitches on mobile by removing the toggle class on page change and all outside click events
+
+  api.onPageChange(() =>{
+      removeDropdownClass();
+  });
+  function removeDropdownClass() {
+      $("#dropdown-button-content").removeClass("show-dropdown");
+  };
+
+  $(document).on("click", function(event){
+    if(!$(event.target).closest("#dropdown-button").length){
+        $("#dropdown-button-content").removeClass("show-dropdown");
+    }
+  });
+</script>
+

@@ -21,11 +21,3 @@
   padding-bottom: 12px;
   justify-content: flex-start;
 }
-/* Change the background color of the dropdown button when the dropdown content is shown */
-#dropdown-button:hover button{
-  background: var(--tertiary-hover);
-  color: var(--secondary);
-} 
-#dropdown-button:hover button svg {
-  color: var(--secondary);
-} 

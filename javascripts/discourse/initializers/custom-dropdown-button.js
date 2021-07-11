@@ -51,16 +51,6 @@ export default {
           }
         };
 
-        const toggleDropdown = function() {
-          const dropdownContent = document.getElementById("dropdown-button-content");
-          dropdownContent.classList.toggle("show-dropdown");
-        };
-
-        const createTopicThenToggle = async () => {
-          createTopic();
-          toggleDropdown();
-        };
-
         menu_links_buffer.push (
           h("a.btn.btn-default.btn-icon-text", { onclick: createTopic }, 
             [iconNode(settings.new_topic_icon), 
@@ -68,7 +58,13 @@ export default {
             ]
           )
         );
-            
+        
+        //Add class toggle used in mobile.scss; desktop uses hover
+        const toggleDropdown = function() {
+          const dropdownContent = document.getElementById("dropdown-button-content");
+          dropdownContent.classList.toggle("show-dropdown");
+        };
+        
         let menu_buffer = [h('button.btn.btn-primary.btn-small.btn-icon-text', { onclick: toggleDropdown }, [iconNode(settings.button_icon),
             [h('span.d-button-label',`${settings.button_title}`)]]
           )];
