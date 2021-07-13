@@ -4,7 +4,7 @@ import { iconNode } from "discourse-common/lib/icon-library";
 import { default as composerModal } from "discourse/models/composer";
 
 export default {
-  name: "custom-dropdown-button",
+  name: "wizards-dropdown-button",
   initialize () {
     withPluginApi ("0.8.41", (api) => {
       api.decorateWidget("header-buttons:before", helper => {
