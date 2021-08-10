@@ -21,3 +21,8 @@
   padding-bottom: 12px;
   justify-content: flex-start;
 }
+@if $hide_default_new_topic_button == 'true' {
+  .navigation-controls #create-topic {
+    display: none;
+  }
+}

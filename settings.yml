@@ -7,6 +7,9 @@ button_title:
 hide_button_title_on_mobile:
   type: bool
   default: false
+hide_default_new_topic_button:
+  type: bool
+  default: false
 dropdown_items:
   type: list
   default: "hat-wizard, Wizard 1, /|frog, Wizard 2, /"

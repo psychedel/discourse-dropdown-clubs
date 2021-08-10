@@ -1,89 +1,95 @@
-import {withPluginApi} from "discourse/lib/plugin-api";
+import { withPluginApi } from "discourse/lib/plugin-api";
 import { h } from "virtual-dom";
 import { iconNode } from "discourse-common/lib/icon-library";
 import { default as composerModal } from "discourse/models/composer";
 
 export default {
   name: "wizards-dropdown-button",
-  initialize () {
-    withPluginApi ("0.8.41", (api) => {
-      api.decorateWidget("header-buttons:before", helper => {
-
-        if(api.getCurrentUser() == null) return; 
+  initialize() {
+    withPluginApi("0.8.41", (api) => {
+      api.decorateWidget("header-buttons:before", (helper) => {
+        if (api.getCurrentUser() == null) return;
 
         let container = api.container,
-            composerController = container.lookup("controller:composer");
+          composerController = container.lookup("controller:composer");
 
-        const createTopic = function() {
+        const createTopic = function () {
           const controller = container.lookup("controller:navigation/category"),
-                category = controller.get("category.id"),
-                topicCategory = container
-                  .lookup("route:topic")
-                  .get("context.category.id"),
-                categoryd = topicCategory ? topicCategory : category;
+            category = controller.get("category.id"),
+            topicCategory = container
+              .lookup("route:topic")
+              .get("context.category.id"),
+            categoryd = topicCategory ? topicCategory : category;
 
-          const userCanEdit = controller.get("category.can_edit" );
+          const userCanEdit = controller.get("category.can_edit");
           if (userCanEdit == true) {
             composerController.open({
               action: composerModal.CREATE_TOPIC,
               categoryId: categoryd,
-              draftKey: composerModal.DRAFT
+              draftKey: composerModal.DRAFT,
             });
-          }
-          else {
+          } else {
             composerController.open({
               action: composerModal.CREATE_TOPIC,
-              draftKey: composerModal.DRAFT
+              draftKey: composerModal.DRAFT,
             });
-
-          };
-            
- 
+          }
         };
-            
+
         let menu_links_buffer = [],
-            menu_links  = settings.dropdown_items.split('|');
+          menu_links = settings.dropdown_items.split("|");
 
         if (menu_links !== null) {
           if (menu_links.length > 0) {
-            menu_links.forEach(link => {
-              const attributes = link.split(',');
-              menu_links_buffer.push (
-                h("a.btn.btn-default.btn-icon-text", {
-                  href: attributes[2],
-                  title: attributes[1]
-                  }, 
-                  [iconNode(attributes[0]),
-                  [h("span.d-button-label",`${attributes[1]}`)]
+            menu_links.forEach((link) => {
+              const attributes = link.split(",");
+              menu_links_buffer.push(
+                h(
+                  "a.btn.btn-default.btn-icon-text",
+                  {
+                    href: attributes[2],
+                    title: attributes[1],
+                  },
+                  [
+                    iconNode(attributes[0]),
+                    [h("span.d-button-label", `${attributes[1]}`)],
                   ]
                 )
-              )
-            })
+              );
+            });
           }
-        };
+        }
 
-        menu_links_buffer.push (
-          h("a.btn.btn-default.btn-icon-text", { onclick: createTopic }, 
-            [iconNode(settings.new_topic_icon), 
-            [h("span.d-button-label",`${settings.new_topic_title}`)]
-            ]
-          )
+        menu_links_buffer.push(
+          h("a.btn.btn-default.btn-icon-text", { onclick: createTopic }, [
+            iconNode(settings.new_topic_icon),
+            [h("span.d-button-label", `${settings.new_topic_title}`)],
+          ])
         );
-        
+
         //Add class toggle used in mobile.scss; desktop uses hover
-        const toggleDropdown = function() {
-          const dropdownContent = document.getElementById("dropdown-button-content");
+        const toggleDropdown = function () {
+          const dropdownContent = document.getElementById(
+            "dropdown-button-content"
+          );
           dropdownContent.classList.toggle("show-dropdown");
         };
-        
-        let menu_buffer = [h('button.btn.btn-primary.btn-small.btn-icon-text', { onclick: toggleDropdown }, [iconNode(settings.button_icon),
-            [h('span.d-button-label',`${settings.button_title}`)]]
-          )];
 
-        menu_buffer.push(h('div#dropdown-button-content', menu_links_buffer));
+        let menu_buffer = [
+          h(
+            "button.btn.btn-primary.btn-small.btn-icon-text",
+            { onclick: toggleDropdown },
+            [
+              iconNode(settings.button_icon),
+              [h("span.d-button-label", `${settings.button_title}`)],
+            ]
+          ),
+        ];
 
-        return h('div#dropdown-button', menu_buffer)
-      })
-    })
-  }
-}
+        menu_buffer.push(h("div#dropdown-button-content", menu_links_buffer));
+
+        return h("div#dropdown-button", menu_buffer);
+      });
+    });
+  },
+};
