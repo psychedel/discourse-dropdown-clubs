@@ -21,6 +21,9 @@ export default {
                   .lookup("route:topic")
                   .get("context.category.id"),
                 categoryd = topicCategory ? topicCategory : category;
+
+          const canEdit = controller.get("model.can_edit");
+          console.log(canEdit);
             
           composerController.open({
             action: composerModal.CREATE_TOPIC,
