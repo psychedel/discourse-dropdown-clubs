@@ -22,15 +22,23 @@ export default {
                   .get("context.category.id"),
                 categoryd = topicCategory ? topicCategory : category;
 
-          const canEdit = controller.get("model.can_edit");
-          console.log(canEdit);
+          const userCanEdit = controller.get("category.can_edit" );
+          if (userCanEdit == true) {
+            composerController.open({
+              action: composerModal.CREATE_TOPIC,
+              categoryId: categoryd,
+              draftKey: composerModal.DRAFT
+            });
+          }
+          else {
+            composerController.open({
+              action: composerModal.CREATE_TOPIC,
+              draftKey: composerModal.DRAFT
+            });
+
+          };
             
-          composerController.open({
-            action: composerModal.CREATE_TOPIC,
-            //don't use current category in composer, because we open from a global level
-            //categoryId: categoryd,
-            draftKey: composerModal.DRAFT
-          });
+ 
         };
             
         let menu_links_buffer = [],
