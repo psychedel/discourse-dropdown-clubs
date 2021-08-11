@@ -23,13 +23,11 @@ export default {
 
             let $createTopicDisabled = $("#create-topic.disabled");
             if ($createTopicDisabled.length) {
-            console.log("YES");
             composerController.open({
               action: composerModal.CREATE_TOPIC,
               draftKey: composerModal.DRAFT,
             });
           } else {
-            console.log("NO");
             composerController.open({
               action: composerModal.CREATE_TOPIC,
               categoryId: categoryd,
