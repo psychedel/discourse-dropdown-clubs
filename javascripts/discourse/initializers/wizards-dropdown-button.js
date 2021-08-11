@@ -21,16 +21,18 @@ export default {
               .get("context.category.id"),
             categoryd = topicCategory ? topicCategory : category;
 
+            let $createTopicEnabled = $("#create-topic");
             let $createTopicDisabled = $("#create-topic.disabled");
-            if ($createTopicDisabled.length) {
+
+            if ($createTopicEnabled.length && !$createTopicDisabled.length) {
             composerController.open({
               action: composerModal.CREATE_TOPIC,
+              categoryId: categoryd,
               draftKey: composerModal.DRAFT,
             });
           } else {
             composerController.open({
               action: composerModal.CREATE_TOPIC,
-              categoryId: categoryd,
               draftKey: composerModal.DRAFT,
             });
           }
