@@ -21,16 +21,18 @@ export default {
               .get("context.category.id"),
             categoryd = topicCategory ? topicCategory : category;
 
-          const userCanEdit = controller.get("category.can_edit");
-          if (userCanEdit == true) {
+            let $createTopicDisabled = $("#create-topic.disabled");
+            if ($createTopicDisabled.length) {
+            console.log("YES");
             composerController.open({
               action: composerModal.CREATE_TOPIC,
-              categoryId: categoryd,
               draftKey: composerModal.DRAFT,
             });
           } else {
+            console.log("NO");
             composerController.open({
               action: composerModal.CREATE_TOPIC,
+              categoryId: categoryd,
               draftKey: composerModal.DRAFT,
             });
           }
