@@ -21,10 +21,10 @@ export default {
               .get("context.category.id"),
             categoryd = topicCategory ? topicCategory : category;
 
-            let $createTopicEnabled = $("#create-topic");
-            let $createTopicDisabled = $("#create-topic.disabled");
-
-            if ($createTopicEnabled.length && !$createTopicDisabled.length) {
+          // Only pre-pick a category in the composer when it would be picked using the default new topic button
+          let $createTopicEnabled = $("#create-topic");
+          let $createTopicDisabled = $("#create-topic.disabled");
+          if ($createTopicEnabled.length && !$createTopicDisabled.length) {
             composerController.open({
               action: composerModal.CREATE_TOPIC,
               categoryId: categoryd,
