@@ -19,12 +19,6 @@ dropdown_items:
     <b>Icon:</b> the name of the Fontawesome icon to be used<br>
     <b>Text:</b> the visible text of the menu item<br>
     <b>URL:</b> the URL you want the item to point to"
-new_topic_icon:
-  type: string
-  default: "plus"
-new_topic_title:
-  type: string
-  default: "New Topic"
 Svg_icons:
   type: list
   list_type: compact
