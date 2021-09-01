@@ -7,8 +7,11 @@ export default {
   name: "wizards-dropdown-button",
   initialize() {
     withPluginApi("0.8.41", (api) => {
-      api.decorateWidget("header-buttons:before", (helper) => {
-        if (api.getCurrentUser() == null) return;
+      api.decorateWidget("header-buttons:after", (helper) => {
+        
+        if(settings.show_button_to_visitors == false) {
+          if (api.getCurrentUser() == null) return;
+        }
 
         let container = api.container,
           composerController = container.lookup("controller:composer");
