@@ -8,36 +8,9 @@ export default {
   initialize() {
     withPluginApi("0.8.41", (api) => {
       api.decorateWidget("header-buttons:after", (helper) => {
-        
-        if(settings.show_button_to_visitors == false) {
+        if (settings.show_button_to_visitors == false) {
           if (api.getCurrentUser() == null) return;
         }
-
-        let container = api.container,
-          composerController = container.lookup("controller:composer");
-
-        const createTopic = function () {
-          const controller = container.lookup("controller:navigation/category"),
-            category = controller.get("category.id"),
-            topicCategory = container
-              .lookup("route:topic")
-              .get("context.category.id"),
-            categoryd = topicCategory ? topicCategory : category;
-
-            let $createTopicDisabled = $("#create-topic.disabled");
-            if ($createTopicDisabled.length) {
-            composerController.open({
-              action: composerModal.CREATE_TOPIC,
-              draftKey: composerModal.DRAFT,
-            });
-          } else {
-            composerController.open({
-              action: composerModal.CREATE_TOPIC,
-              categoryId: categoryd,
-              draftKey: composerModal.DRAFT,
-            });
-          }
-        };
 
         let menu_links_buffer = [],
           menu_links = settings.dropdown_items.split("|");
@@ -63,13 +36,42 @@ export default {
           }
         }
 
-        menu_links_buffer.push(
-          h("a.btn.btn-default.btn-icon-text", { onclick: createTopic }, [
-            iconNode(settings.new_topic_icon),
-            [h("span.d-button-label", `${settings.new_topic_title}`)],
-          ])
-        );
+        if (settings.new_topic_as_dropdown == true) {
+          let container = api.container,
+            composerController = container.lookup("controller:composer");
 
+          const createTopic = function () {
+            const controller = container.lookup(
+                "controller:navigation/category"
+              ),
+              category = controller.get("category.id"),
+              topicCategory = container
+                .lookup("route:topic")
+                .get("context.category.id"),
+              categoryd = topicCategory ? topicCategory : category;
+
+            let $createTopicDisabled = $("#create-topic.disabled");
+            if ($createTopicDisabled.length) {
+              composerController.open({
+                action: composerModal.CREATE_TOPIC,
+                draftKey: composerModal.DRAFT,
+              });
+            } else {
+              composerController.open({
+                action: composerModal.CREATE_TOPIC,
+                categoryId: categoryd,
+                draftKey: composerModal.DRAFT,
+              });
+            }
+          };
+
+          menu_links_buffer.push(
+            h("a.btn.btn-default.btn-icon-text", { onclick: createTopic }, [
+              iconNode(settings.new_topic_icon),
+              [h("span.d-button-label", `${settings.new_topic_title}`)],
+            ])
+          );
+        }
         //Add class toggle used in mobile.scss; desktop uses hover
         const toggleDropdown = function () {
           const dropdownContent = document.getElementById(
