@@ -25,6 +25,9 @@ new_topic_icon:
 new_topic_title:
   type: string
   default: "New Topic"
+hide_default_new_topic_button:
+  type: bool
+  default: false
 Svg_icons:
   type: list
   list_type: compact
