@@ -10,34 +10,6 @@ export default {
       api.decorateWidget("header-buttons:before", (helper) => {
         if (api.getCurrentUser() == null) return;
 
-        let container = api.container,
-          composerController = container.lookup("controller:composer");
-
-        const createTopic = function () {
-          const controller = container.lookup("controller:navigation/category"),
-            category = controller.get("category.id"),
-            topicCategory = container
-              .lookup("route:topic")
-              .get("context.category.id"),
-            categoryd = topicCategory ? topicCategory : category;
-
-          // Only pre-pick a category in the composer when it would be picked using the default new topic button
-          let $createTopicEnabled = $("#create-topic");
-          let $createTopicDisabled = $("#create-topic.disabled");
-          if ($createTopicEnabled.length && !$createTopicDisabled.length) {
-            composerController.open({
-              action: composerModal.CREATE_TOPIC,
-              categoryId: categoryd,
-              draftKey: composerModal.DRAFT,
-            });
-          } else {
-            composerController.open({
-              action: composerModal.CREATE_TOPIC,
-              draftKey: composerModal.DRAFT,
-            });
-          }
-        };
-
         let menu_links_buffer = [],
           menu_links = settings.dropdown_items.split("|");
 
@@ -61,13 +33,6 @@ export default {
             });
           }
         }
-
-        menu_links_buffer.push(
-          h("a.btn.btn-default.btn-icon-text", { onclick: createTopic }, [
-            iconNode(settings.new_topic_icon),
-            [h("span.d-button-label", `${settings.new_topic_title}`)],
-          ])
-        );
 
         //Add class toggle used in mobile.scss; desktop uses hover
         const toggleDropdown = function () {
